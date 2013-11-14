@@ -1,0 +1,27 @@
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\bin\x86\Debug\Spine Games Template.exe
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\bin\x86\Debug\Spine Games Template.pdb
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\bin\x86\Debug\SpineGames.dll
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\bin\x86\Debug\SpineGames.pdb
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\obj\x86\Debug\Spine Games Template.exe
+C:\Users\Skyview\AppData\Local\Temporary Projects\SpaceGame2.0\obj\x86\Debug\Spine Games Template.pdb
+C:\Users\Skyview\documents\visual studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\SpaceGame2.exe
+C:\Users\Skyview\documents\visual studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\SpaceGame2.pdb
+C:\Users\Skyview\documents\visual studio 2010\Projects\SpaceGame2\SpaceGame2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Skyview\documents\visual studio 2010\Projects\SpaceGame2\SpaceGame2\obj\x86\Debug\SpaceGame2.exe
+C:\Users\Skyview\documents\visual studio 2010\Projects\SpaceGame2\SpaceGame2\obj\x86\Debug\SpaceGame2.pdb
+C:\Users\Skyview\documents\visual studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Content\BasicFont.xnb
+C:\Users\Skyview\documents\visual studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Content\space.xnb
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\obj\x86\Debug\SpaceGame2.csprojResolveAssemblyReference.cache
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Content\GUI\GUIFont.xnb
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Content\GUI\gui.xnb
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Content\GUI\guiPlanet.xnb
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Content\GUI\smallArrow.xnb
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\EmberEngine.dll
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\MonoGame.Framework.dll
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\OpenTK.dll
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Lidgren.Network.dll
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\Tao.Sdl.dll
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\EmberEngine.pdb
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\SpaceGame2\bin\x86\Debug\DLL\EmberEngine.dll

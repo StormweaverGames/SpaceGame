@@ -1,0 +1,6 @@
+Content\BasicFont.xnb
+Content\space.xnb
+Content\GUI\GUIFont.xnb
+Content\GUI\gui.xnb
+Content\GUI\guiPlanet.xnb
+Content\GUI\smallArrow.xnb

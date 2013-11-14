@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PlanetSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlanetName>Akycha</PlanetName>
+  <Roughness>16</Roughness>
+  <GroundColor>
+    <B>0</B>
+    <G>140</G>
+    <R>255</R>
+    <A>255</A>
+    <PackedValue>4278226175</PackedValue>
+  </GroundColor>
+  <InnerGroundColor>
+    <B>0</B>
+    <G>255</G>
+    <R>255</R>
+    <A>255</A>
+    <PackedValue>4278255615</PackedValue>
+  </InnerGroundColor>
+  <AirColor>
+    <B>255</B>
+    <G>255</G>
+    <R>255</R>
+    <A>255</A>
+    <PackedValue>4294967295</PackedValue>
+  </AirColor>
+  <WaterColor>
+    <B>255</B>
+    <G>255</G>
+    <R>0</R>
+    <A>255</A>
+    <PackedValue>4294967040</PackedValue>
+  </WaterColor>
+  <WaterDepth>0</WaterDepth>
+  <AtomsphereDepth>100</AtomsphereDepth>
+  <AtomosphereDensity>0</AtomosphereDensity>
+  <AtmosphereToxicity>0</AtmosphereToxicity>
+  <StarTemp>5000</StarTemp>
+  <PlanetRadius>700</PlanetRadius>
+  <OrbitDistance>200</OrbitDistance>
+  <Moons>
+    <Planet />
+    <Planet />
+    <Planet />
+  </Moons>
+  <InitialOrbitAngle>0</InitialOrbitAngle>
+  <OrbitAngleSpeed>0</OrbitAngleSpeed>
+  <InitialPlanetAngle>0</InitialPlanetAngle>
+  <PlanetAngleSpeed>0</PlanetAngleSpeed>
+  <Type>Star</Type>
+</PlanetSetting>>
+</PlanetSetting>/InitialPlanetAngle>
+  <PlanetAngleSpeed>0</PlanetAngleSpeed>
+  <Type>Star</Type>
+</PlanetSetting>
