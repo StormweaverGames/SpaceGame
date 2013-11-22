@@ -27,20 +27,7 @@ namespace SpaceGame2
         /// The spritebatch used for drawing basic 2D shapes and such
         /// </summary>
         SpriteBatch spriteBatch;
-
-        private static float gameSpeed = 1;
-        /// <summary>
-        /// Gets or sets this game's speed, clamped above 0
-        /// </summary>
-        public static float GameSpeed
-        {
-            get { return gameSpeed; }
-            set
-            {
-                gameSpeed = value > 0 ? value : 0;
-            }
-        }
-
+        
         /// <summary>
         /// The list of all gamescreens in this game
         /// </summary>
@@ -55,6 +42,7 @@ namespace SpaceGame2
         /// </summary>
         public SpaceGame()
         {
+            StaticVars.Initialize();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }

@@ -1,0 +1,51 @@
+hPos_0: 100.0302
+hPos_1: 102.7855
+hPos_2: 99.46763
+hPos_3: 101.2571
+hPos_4: 99.02493
+hPos_5: 102.2479
+hPos_6: 103.5205
+hPos_7: 104.7194
+hPos_8: 99.98734
+hPos_9: 96.49213
+hPos_10: 100.9866
+hPos_11: 91.50048
+hPos_12: 89.98829
+hPos_13: 92.52757
+hPos_14: 94.98591
+hPos_15: 98.48058
+hPos_16: 100.0435
+vPos_0: {X:100.0302 Y:0 Z:0}
+vCol_0: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_1: {X:94.96145 Y:0 Z:39.33432}
+vCol_1: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_2: {X:70.33424 Y:0 Z:70.33424}
+vCol_2: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_3: {X:38.74942 Y:0 Z:93.54936}
+vCol_3: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_4: {X:6.063328E-15 Y:0 Z:99.02493}
+vCol_4: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_5: {X:-39.1286 Y:0 Z:94.46478}
+vCol_5: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_6: {X:-73.20004 Y:0 Z:73.20004}
+vCol_6: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_7: {X:-96.74808 Y:0 Z:40.07437}
+vCol_7: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_8: {X:-99.98734 Y:0 Z:1.224451E-14}
+vCol_8: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_9: {X:-89.1471 Y:0 Z:-36.92594}
+vCol_9: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_10: {X:-71.40829 Y:0 Z:-71.40829}
+vCol_10: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_11: {X:-35.01572 Y:0 Z:-84.53542}
+vCol_11: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_12: {X:-1.653003E-14 Y:0 Z:-89.98829}
+vCol_12: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_13: {X:35.40877 Y:0 Z:-85.48432}
+vCol_13: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_14: {X:67.16518 Y:0 Z:-67.16518}
+vCol_14: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_15: {X:90.98419 Y:0 Z:-37.68689}
+vCol_15: [Color: R=123, G=123, B=123, A=255, PackedValue=4286282619]
+vPos_16: {X:0 Y:0 Z:0}
+vCol_16: [Color: R=169, G=169, B=169, A=255, PackedValue=4289309097]

@@ -1,6 +1,6 @@
-///TODO:
-///
-///Fix Transformation Matrixes to seperate planet rotation and motion
+///<summary>
+///</summary>
+
 
 using System;
 using System.Collections.Generic;
@@ -29,15 +29,15 @@ namespace SpaceGame2
         /// <summary>
         /// The length of any planet's heightmap
         /// </summary>
-        public const int HeightMapStepping = 1024;
+        public int HeightMapStepping;
         /// <summary>
         /// The amount of triangles generated for any planet's air
         /// </summary>
-        public const int AirStepping = 500;
+        public int AirStepping = 72;
         /// <summary>
         /// The amount of triangles generated for any planet's water
         /// </summary>
-        public const int WaterStepping = 500;
+        public int WaterStepping = 72;
 
         /// <summary>
         /// Holds the settings for this planet
@@ -194,6 +194,10 @@ namespace SpaceGame2
             this.parentSystem = parent;
             this.parentPlanet = parentPlanet;
 
+            this.HeightMapStepping = settings.HeightmapStepping;
+            this.AirStepping = settings.AirStepping;
+            this.WaterStepping = settings.WaterStepping;
+
             effect = new BasicEffect(game.GraphicsDevice);
             effect.VertexColorEnabled = true;
 
@@ -205,7 +209,7 @@ namespace SpaceGame2
             }
 
             if (settings.Type != PlanetType.Star & settings.OrbitAngleSpeed == 0)
-                this.settings.OrbitAngleSpeed = 100 / settings.OrbitDistance;
+                this.settings.OrbitAngleSpeed = 100 / settings.OrbitInfo.Apopsis;
 
             state.OrbitAngle = settings.InitialOrbitAngle;
             state.PlanetAngle = settings.InitialPlanetAngle;
@@ -233,7 +237,8 @@ namespace SpaceGame2
 
             if (settings.Type != PlanetType.Star)
             {
-                temp = GetTemp(Settings.OrbitDistance, parent.Star.Settings.StarTemp,
+                temp = GetTemp(Settings.OrbitInfo.GetRadius(State.OrbitAngle), 
+                    parent.Star.Settings.StarTemp,
                     Settings.AtomosphereDensity, Settings.Type);
             }
 
@@ -306,8 +311,23 @@ namespace SpaceGame2
 
             float max = state.HeightMap.Max();
 
-            landVerts = new VertexPositionColorNormal[(HeightMapStepping * 2) + 1];
-            LandIndices = new short[HeightMapStepping * 9];
+            if (landVerts == null)
+            {
+                landVerts = new VertexPositionColorNormal[(HeightMapStepping * 2) + 1];
+            }
+            else if (landVerts.Length != (HeightMapStepping * 2) + 1)
+            {
+                landVerts = new VertexPositionColorNormal[(HeightMapStepping * 2) + 1];
+            }
+
+            if (LandIndices == null)
+            {
+                LandIndices = new short[HeightMapStepping * 9];
+            }
+            else if (LandIndices.Length != HeightMapStepping * 9)
+            {
+                LandIndices = new short[HeightMapStepping * 9];
+            }
 
             landVerts[HeightMapStepping * 2] = new VertexPositionColorNormal(Vector3.Zero,
                 settings.InnerGroundColor,
@@ -354,6 +374,11 @@ namespace SpaceGame2
             }
         }
 
+        /// <summary>
+        /// Builds this planet's geometry using the simpler method
+        /// </summary>
+        /// <param name="minX">The minimum x to start rendering from</param>
+        /// <param name="maxX">The maximum x to render to</param>
         private void BuildGeometrySimple(int minX, int maxX)
         {
             double increment = 360.0 / (HeightMapStepping);
@@ -361,8 +386,23 @@ namespace SpaceGame2
 
             float max = state.HeightMap.Max();
 
-            landVerts = new VertexPositionColorNormal[(HeightMapStepping) + 1];
-            LandIndices = new short[(HeightMapStepping) * 3];
+            if (landVerts == null)
+            {
+                landVerts = new VertexPositionColorNormal[HeightMapStepping + 1];
+            }
+            else if (landVerts.Length != HeightMapStepping + 1)
+            {
+                landVerts = new VertexPositionColorNormal[HeightMapStepping + 1];
+            }
+
+            if (LandIndices == null)
+            {
+                LandIndices = new short[HeightMapStepping * 3];
+            }
+            else if (LandIndices.Length != HeightMapStepping * 3)
+            {
+                LandIndices = new short[HeightMapStepping * 3];
+            }
 
             landVerts[HeightMapStepping] = new VertexPositionColorNormal(
                 Vector3.Zero,
@@ -530,17 +570,17 @@ namespace SpaceGame2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Update(GameTime gameTime)
         {
-            foreach (Planet p in this.Settings.Moons)
-                p.Update(gameTime);
-
-            state.OrbitAngle += settings.OrbitAngleSpeed * SpaceGame.GameSpeed;
-            state.PlanetAngle += settings.PlanetAngleSpeed * SpaceGame.GameSpeed;
+            state.OrbitAngle += settings.OrbitAngleSpeed * StaticVars.GameSpeed;
+            state.PlanetAngle += settings.PlanetAngleSpeed * StaticVars.GameSpeed;
 
             //Make sure angles wrap
             state.OrbitAngle = Utils.Wrap(state.OrbitAngle, 0, 360);
             state.PlanetAngle = Utils.Wrap(state.PlanetAngle, 0, 360);
 
             UpdateMatrix();
+
+            foreach (Planet p in this.Settings.Moons)
+                p.Update(gameTime);
         }
 
         /// <summary>
@@ -555,18 +595,19 @@ namespace SpaceGame2
 
             if (settings.OrbitPlanet == null) //orbit planet is the planet it's orbiting
             {
-                pos = new Vector2(1,1);
+                pos = new Vector2(0,0);
             }
             else
             {
-                pos =
+                //Settings.OrbitInfo.Centre = Settings.OrbitPlanet.pos;
+                this.pos = Settings.OrbitPlanet.Position + 
                     new Vector2(
-                        (float)Math2.LengthdirX(state.OrbitAngle, settings.OrbitDistance),
-                        (float)Math2.LengthdirY(state.OrbitAngle, settings.OrbitDistance)
-                        ) + settings.OrbitPlanet.Position;
+                        (float)Math2.LengthdirX(State.OrbitAngle, Settings.OrbitInfo.Apopsis),
+                        (float)Math2.LengthdirY(State.OrbitAngle, Settings.OrbitInfo.Apopsis)
+                        );
             }
 
-            rotation = Matrix.CreateRotationY((float)Math2.ToRad(state.PlanetAngle)); 
+            rotation = Matrix.CreateRotationY((float)state.PlanetAngle.ToRad()); 
 
             transform = Matrix.CreateTranslation(new Vector3(pos.X, 0, pos.Y));
         }
@@ -816,6 +857,18 @@ namespace SpaceGame2
             /// Sets this planet's render style (must be set BEFORE building geometry)
             /// </summary>
             public RenderStyle RenderStyle = RenderStyle.Advanced;
+            /// <summary>
+            /// The height map stepping for the planet, default 1024
+            /// </summary>
+            public int HeightmapStepping = 1024;
+            /// <summary>
+            /// The amount of triangles generated for the planet's air, default 72
+            /// </summary>
+            public int AirStepping = 72;
+            /// <summary>
+            /// The amount of triangles generated for the planet's water, default 72
+            /// </summary>
+            public int WaterStepping = 72;
 
             /// <summary>
             /// The depth of the water on this planet
@@ -856,7 +909,7 @@ namespace SpaceGame2
             /// <summary>
             /// How far this planet orbits from it's parent
             /// </summary>
-            public float OrbitDistance = 200;
+            public OrbitalInfo OrbitInfo;
             /// <summary>
             /// The parent planet that this planet orbits around
             /// </summary>
@@ -865,7 +918,7 @@ namespace SpaceGame2
             /// An array of all planets that orbit this planet
             /// </summary>
             public Planet[] Moons = new Planet[0];
-
+            
             /// <summary>
             /// The initial angle that the planet is relative to it's
             /// parent in <b>degrees</b>
@@ -903,8 +956,7 @@ namespace SpaceGame2
                 return (PlanetSetting)s.Deserialize(reader);                
             }
         }
-
-
+        
         /// <summary>
         /// Represents the state of a planet
         /// </summary>

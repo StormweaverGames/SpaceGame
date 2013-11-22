@@ -132,6 +132,17 @@ namespace SpaceGame2
 
             return sb.ToString();
         }
+        
+        /// <summary>
+        /// Fixes a font so that it is spaced out by the given amount
+        /// </summary>
+        /// <param name="SpriteFont">The spritefont to fix</param>
+        /// <param name="spacing">The pixel spacing between lines</param>
+        public static SpriteFont FixFontSpacing(SpriteFont SpriteFont, float spacing)
+        {
+            SpriteFont.LineSpacing = (int)((SpriteFont.MeasureString(" ").Y / 2) + spacing);
+            return SpriteFont;
+        }
 
         /// <summary>
         /// Roughens up an array of floats by a given scale

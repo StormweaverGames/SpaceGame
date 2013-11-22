@@ -1,1 +1,2 @@
+C:\Users\Skyview\Documents\Visual Studio 2010\Projects\SpaceGame2\Content\obj\x86\Release\Content.contentprojResolveAssemblyReference.cache
 C:\Users\Skyview\Documents\GitHub\SpaceGame\Content\obj\x86\Release\Content.contentprojResolveAssemblyReference.cache

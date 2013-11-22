@@ -1,0 +1,52 @@
+hPos_0: 99.95049
+hPos_1: 94.26499
+hPos_2: 94.49416
+hPos_3: 102.7492
+hPos_4: 104.9783
+hPos_5: 109.767
+hPos_6: 108.4776
+hPos_7: 103.2235
+hPos_8: 99.98917
+hPos_9: 100.2518
+hPos_10: 96.46661
+hPos_11: 94.74743
+hPos_12: 87.00714
+hPos_13: 85.71033
+hPos_14: 90.48888
+hPos_15: 95.21362
+hPos_16: 99.97136
+vPos_0: {X:99.95049 Y:0 Z:0}
+vCol_0: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_1: {X:87.08949 Y:0 Z:36.07365}
+vCol_1: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_2: {X:66.81746 Y:0 Z:66.81746}
+vCol_2: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_3: {X:39.32042 Y:0 Z:94.9279}
+vCol_3: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_4: {X:6.427852E-15 Y:0 Z:104.9783}
+vCol_4: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_5: {X:-42.00602 Y:0 Z:101.4115}
+vCol_5: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_6: {X:-76.70524 Y:0 Z:76.70524}
+vCol_6: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_7: {X:-95.36604 Y:0 Z:39.50191}
+vCol_7: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_8: {X:-99.98917 Y:0 Z:1.224474E-14}
+vCol_8: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_9: {X:-92.62056 Y:0 Z:-38.36469}
+vCol_9: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_10: {X:-68.21219 Y:0 Z:-68.21219}
+vCol_10: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_11: {X:-36.25827 Y:0 Z:-87.53521}
+vCol_11: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_12: {X:-1.598242E-14 Y:0 Z:-87.00714}
+vCol_12: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_13: {X:32.79993 Y:0 Z:-79.18603}
+vCol_13: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_14: {X:63.9853 Y:0 Z:-63.9853}
+vCol_14: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_15: {X:87.96592 Y:0 Z:-36.43668}
+vCol_15: [Color: R=78, G=78, B=78, A=255, PackedValue=4283321934]
+vPos_16: {X:0 Y:0 Z:0}
+vCol_16: [Color: R=169, G=169, B=169, A=255, PackedValue=4289309097]
+=169, B=169, A=255, PackedValue=4289309097]

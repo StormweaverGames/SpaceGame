@@ -16,10 +16,6 @@ namespace SpaceGame2
     class MainGame : GameScreen
     {        
         /// <summary>
-        /// The graphics device manager
-        /// </summary>
-        GraphicsDeviceManager graphics;
-        /// <summary>
         /// A basic font used for drawing text
         /// </summary>
         SpriteFont basicFont;
@@ -117,7 +113,7 @@ namespace SpaceGame2
             BackGroundView.View = Matrix.CreateLookAt(new Vector3(400, 1F, 300), new Vector3(400, 0, 300), new Vector3(0, 0, 1));
             BackGroundView.Projection = 
                 Matrix.CreatePerspective(800 * 0.01F, 600 * 0.01F, 0.01F, MaxCameraZoom + 2);
-
+            
             InitializePlanets();
             InitializeKeys();
         }
@@ -136,7 +132,7 @@ namespace SpaceGame2
             kuma.RenderStyle = Planet.RenderStyle.Advanced;
             kuma.InitialOrbitAngle = 0;
             kuma.PlanetRadius = 100;
-            kuma.OrbitDistance = 2500;
+            kuma.OrbitInfo = 2500;
             kuma.PlanetAngleSpeed = 0.01;
             kuma.AirColor = Color.Aqua;
             kuma.AtomosphereDensity = 50.0F;
@@ -152,7 +148,7 @@ namespace SpaceGame2
             luna.InnerGroundColor = Color.LightGray;
             luna.InitialOrbitAngle = 75;
             luna.PlanetRadius = 50;
-            luna.OrbitDistance = 600;
+            luna.OrbitInfo = 600;
             luna.PlanetAngleSpeed = 0.001;
             #endregion
             #endregion
@@ -165,7 +161,7 @@ namespace SpaceGame2
             altos.InnerGroundColor = Color.Magenta;
             altos.PlanetRadius = 200;
             altos.InitialOrbitAngle = 127;
-            altos.OrbitDistance = 7000;
+            altos.OrbitInfo = 7000;
             altos.PlanetAngleSpeed = -0.001;
             altos.AirColor = Color.Blue;
             altos.AtmosphereToxicity = 25.0F;
@@ -183,7 +179,7 @@ namespace SpaceGame2
             litha.InnerGroundColor = Color.LightGray;
             litha.PlanetRadius = 75;
             litha.InitialOrbitAngle = 127;
-            litha.OrbitDistance = 900;
+            litha.OrbitInfo = 900;
             litha.PlanetAngleSpeed = -0.01;
             litha.AirColor = Color.Teal;
             litha.AtmosphereToxicity = 15.0F;
@@ -202,7 +198,7 @@ namespace SpaceGame2
             nora.InnerGroundColor = Color.Maroon;
             nora.PlanetRadius = 50;
             nora.InitialOrbitAngle = 23;
-            nora.OrbitDistance = 2000;
+            nora.OrbitInfo = 2000;
             nora.PlanetAngleSpeed = -0.001;
             nora.AirColor = Color.Red;
             nora.AtmosphereToxicity = 0;
@@ -218,9 +214,9 @@ namespace SpaceGame2
             ceriese.PlanetName = "Ceriese";
             ceriese.GroundColor = Color.Red;
             ceriese.InnerGroundColor = Color.Maroon;
-            ceriese.PlanetRadius = 300;
+            ceriese.PlanetRadius = 500;
             ceriese.InitialOrbitAngle = 202;
-            ceriese.OrbitDistance = 50000;
+            ceriese.OrbitInfo = 30000;
             ceriese.PlanetAngleSpeed = -0.001;
             ceriese.AirColor = Color.Purple;
             ceriese.AtmosphereToxicity = 100.0F;
@@ -244,7 +240,7 @@ namespace SpaceGame2
             kratos.GroundColor = Color.Red;
             kratos.InnerGroundColor = Color.DarkOrange;
             kratos.InitialOrbitAngle = 202;
-            kratos.OrbitDistance = 5000;
+            kratos.OrbitInfo = 5000;
             kratos.PlanetAngleSpeed = -0.001;
             kratos.AirColor = Color.LightGreen;
             kratos.AtomsphereDepth = 200;
@@ -262,15 +258,40 @@ namespace SpaceGame2
             jodon.InnerGroundColor = Color.DarkGray;
             jodon.PlanetRadius = 100;
             jodon.InitialOrbitAngle = 127;
-            jodon.OrbitDistance = 5500;
+            jodon.OrbitInfo = 15000;
             jodon.OrbitAngleSpeed = 1.5 * 10e-3;
-            jodon.PlanetAngleSpeed = -10e-3;
             jodon.AirColor = Color.Green;
             jodon.AtmosphereToxicity = 100F;
             jodon.AtomosphereDensity = 100F;
             jodon.AtomsphereDepth = 100;
             jodon.WaterColor = Color.Lerp(Color.LightPink, Color.Transparent, 0.1F);
             jodon.WaterDepth = 100;
+            #endregion
+
+            #region Asteroids
+            int AsteroidCount = StaticVars.Random.Next(0, 100);
+            Planet.PlanetSetting[] Asteroids = new Planet.PlanetSetting[AsteroidCount];
+
+            double sliceSize = (360.0 / AsteroidCount);
+
+            for (int i = 0; i < AsteroidCount; i++)
+            {
+                Asteroids[i] = new Planet.PlanetSetting();
+
+                Asteroids[i].InitialOrbitAngle =
+                    (sliceSize * i) +
+                    (StaticVars.Random.Next( -(int)(sliceSize / 2), (int)(sliceSize / 2)));
+
+                Asteroids[i].HeightmapStepping = 16;
+                Asteroids[i].RenderStyle = Planet.RenderStyle.Simple;
+                Asteroids[i].PlanetName = "Asteroid " + i;
+                Asteroids[i].InnerGroundColor = Color.DarkGray;
+                byte Shade = (byte)StaticVars.Random.Next(20, 200);
+                Asteroids[i].GroundColor = Color.FromNonPremultiplied(Shade, Shade, Shade, 255);
+                Asteroids[i].OrbitInfo = 12000 + StaticVars.Random.Next(-500, 500);
+                Asteroids[i].OrbitInfo.Apopsis = 12000 + StaticVars.Random.Next(-500, 500);
+                Asteroids[i].OrbitInfo.Perapsis = 12000 + StaticVars.Random.Next(-500, 500);
+            }
             #endregion
 
             #region Star
@@ -293,11 +314,16 @@ namespace SpaceGame2
             solarSystem.AddPlanet("Kuma", luna);
             solarSystem.AddPlanet(altos);
             solarSystem.AddPlanet("Altos", litha);
-            solarSystem.AddPlanet("Kuma", luna);
+            solarSystem.AddPlanet("Altos", nora);
+            for (int i = 0; i < AsteroidCount; i++)
+            {
+                solarSystem.AddPlanet(Asteroids[i]);
+            }
+            solarSystem.AddPlanet(jodon);
             solarSystem.AddPlanet(ceriese);
             solarSystem.AddPlanet("Ceriese", kratos);
 
-            TargetPlanet = solarSystem.GetStar();
+                TargetPlanet = solarSystem.GetStar();
         }
 
         /// <summary>
@@ -352,6 +378,7 @@ namespace SpaceGame2
 
             gui = new GUI();
             gui.LoadContent(Game.Content);
+            gui.PlanetInfo = true;
 
             BackQuad = new Quad(Game.GraphicsDevice, new Vector2(800, 600), 
                 Game.Content.Load<Texture2D>("space"), Color.White);
@@ -391,7 +418,7 @@ namespace SpaceGame2
             TargetPlanet = solarSystem.GetPlanetFromID(PlanetRef);
 
             if (TrackSurface)
-                view.Rotation -= (float)TargetPlanet.Settings.PlanetAngleSpeed * SpaceGame.GameSpeed;
+                view.Rotation -= (float)TargetPlanet.Settings.PlanetAngleSpeed * StaticVars.GameSpeed;
 
             //Update camera position
             CameraPos = TargetPlanet.Position +
@@ -410,6 +437,8 @@ namespace SpaceGame2
             (float)Math2.LengthdirY(
             view.Rotation + CameraTrack, 1)));
             ;
+
+            gui.Update(spriteBatch, TargetPlanet);
 
             base.Update(gameTime);
         }
@@ -441,7 +470,7 @@ namespace SpaceGame2
                 spriteBatch.DrawString(basicFont, "Planet Rot: " + TargetPlanet.State.PlanetAngle, new Vector2(10, 85), Color.White);
                 spriteBatch.DrawString(basicFont, "Orbit Angle: " + TargetPlanet.State.OrbitAngle, new Vector2(10, 100), Color.White);
                 spriteBatch.DrawString(basicFont, "Pos: " + TargetPlanet.Position, new Vector2(10, 115), Color.White);
-                spriteBatch.DrawString(basicFont, "Game Speed: " + SpaceGame.GameSpeed, new Vector2(10, 130), Color.White);
+                spriteBatch.DrawString(basicFont, "Game Speed: " + StaticVars.GameSpeed, new Vector2(10, 130), Color.White);
                 spriteBatch.DrawString(basicFont, "Debug: " + DebugState, new Vector2(10, 145), Color.White);
                 spriteBatch.DrawString(basicFont, 
                     Utils.WrapText(basicFont, 
@@ -449,7 +478,7 @@ namespace SpaceGame2
                     new Vector2(10, 160), Color.White);
             }
 
-            gui.Draw(spriteBatch, Game.GraphicsDevice, TargetPlanet);
+            gui.Draw(spriteBatch, TargetPlanet);
 
             spriteBatch.End();
         }
@@ -550,8 +579,8 @@ namespace SpaceGame2
         /// <param name="e">A blank EventArgs</param>
         public void SpeedUp(KeyDownEventArgs e)
         {
-            if (SpaceGame.GameSpeed < 128)
-                SpaceGame.GameSpeed *= 2;
+            if (StaticVars.GameSpeed < 128)
+                StaticVars.GameSpeed *= 2;
         }
 
         /// <summary>
@@ -561,8 +590,8 @@ namespace SpaceGame2
         /// <param name="e">A blank EventArgs</param>
         public void SpeedDown(KeyDownEventArgs e)
         {
-            if (SpaceGame.GameSpeed > 0.5F)
-                SpaceGame.GameSpeed /= 2;
+            if (StaticVars.GameSpeed > 0.5F)
+                StaticVars.GameSpeed /= 2;
         }
 
         /// <summary>

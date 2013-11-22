@@ -26,11 +26,11 @@ namespace SpaceGame2
             }
         }
 
-        double apoapsis;
+        float apoapsis;
         /// <summary>
         /// Gets or sets this planets apoapsis
         /// </summary>
-        public double Apopsis
+        public float Apopsis
         {
             get { return apoapsis; }
             set
@@ -40,11 +40,11 @@ namespace SpaceGame2
             }
         }
 
-        double perapsis;
+        float perapsis;
         /// <summary>
         /// Gets or sets this planets perapsis
         /// </summary>
-        public double Perapsis
+        public float Perapsis
         {
             get { return perapsis; }
             set
@@ -54,17 +54,17 @@ namespace SpaceGame2
             }
         }
 
-        double axisMajor;
+        float axisMajor;
         /// <summary>
-        /// Gets or sets the major axis in <b>RADIANS</b>. This is the angle relative to
+        /// Gets or sets the major axis in <b>Degrees</b>. This is the angle relative to
         /// +X that the orbit's perapsis/apoapsis lie on
         /// </summary>
-        public double AxisMajor
+        public float AxisMajor
         {
-            get { return axisMajor; }
+            get { return axisMajor * toDeg; }
             set
             {
-                axisMajor = value;
+                axisMajor = value * toRad;
                 RebuildVars();
             }
         }
@@ -72,15 +72,15 @@ namespace SpaceGame2
         /// <summary>
         /// Gets the Eccentricity of this orbit. 0 being circular and 1 being a straight line
         /// </summary>
-        public double Eccentricity
+        public float Eccentricity
         {
             get
             {
                 focalLength = ((apoapsis + perapsis) / 2) - perapsis;
-                double radX = ((apoapsis + perapsis) / 2);
-                double radY = apoapsis - (apoapsis - perapsis);
+                float radX = ((apoapsis + perapsis) / 2);
+                float radY = apoapsis - (apoapsis - perapsis);
 
-                return Math.Sqrt((Math.Pow(radX, 2) - Math.Pow(radY, 2)) / Math.Pow(radX, 2));
+                return (float)Math.Sqrt((Math.Pow(radX, 2) - Math.Pow(radY, 2)) / Math.Pow(radX, 2));
             }
         }
 
@@ -95,41 +95,41 @@ namespace SpaceGame2
             }
         }
 
-        public double OrbitalSpeed = 0.0005;
+        public float OrbitalSpeed = 0.0005F;
         #endregion
 
         #region Math Vars
         /// <summary>
         /// The radius parallel to the axis major
         /// </summary>
-        double radX;
+        float radX;
         /// <summary>
         /// The radius perpindicular to the axis major
         /// </summary>
-        double radY;
+        float radY;
 
         /// <summary>
         /// The centre X of this orbit's ellipse
         /// </summary>
-        double centreX;
+        float centreX;
         /// <summary>
         /// The centre Y of this orbit's ellipse
         /// </summary>
-        double centreY;
+        float centreY;
 
         /// <summary>
         /// The distance from the orbit ellipse's orgin and it's host position
         /// </summary>
-        double focalLength;
+        float focalLength;
         #endregion
 
         /// <summary>
         /// Creates a new perfectly circular orbital info object
         /// </summary>
-        /// <param name="Apoapsis">The distance to orbit from the entre</param>
+        /// <param name="Apoapsis">The distance to orbit from the centre</param>
         /// <param name="AxisMajor">The major axis to orbit on</param>
         /// <param name="Centre">The focal point of this orbit</param>
-        public OrbitalInfo(double Apoapsis, double AxisMajor, Vector2 Centre)
+        public OrbitalInfo(float Apoapsis, float AxisMajor, Vector2 Centre)
         {
             this.apoapsis = Apoapsis;
             this.perapsis = Apoapsis;
@@ -142,11 +142,24 @@ namespace SpaceGame2
         /// <summary>
         /// Creates a new perfectly circular orbital info object
         /// </summary>
+        /// <param name="Apoapsis">The distance to orbit from the centre</param>
+        public OrbitalInfo(float Apoapsis)
+        {
+            this.apoapsis = Apoapsis;
+            this.perapsis = Apoapsis;
+            this.centre = Vector2.Zero;
+
+            RebuildVars();
+        }
+
+        /// <summary>
+        /// Creates a new perfectly circular orbital info object
+        /// </summary>
         /// <param name="Apoapsis">The apoapsis of this orbit</param>
         /// <param name="Perapsis">The perapsis of this orbit</param>
         /// <param name="AxisMajor">The major axis to orbit on</param>
         /// <param name="Centre">The focal point of this orbit</param>
-        public OrbitalInfo(double Apoapsis, double Perapsis, double AxisMajor, Vector2 Centre)
+        public OrbitalInfo(float Apoapsis, float Perapsis, float AxisMajor, Vector2 Centre)
         {
             this.apoapsis = Math.Max(Apoapsis, Perapsis);
             this.perapsis = Math.Min(Apoapsis, Perapsis);
@@ -165,35 +178,63 @@ namespace SpaceGame2
             radX = ((apoapsis + perapsis) / 2);
             radY = apoapsis - (apoapsis - perapsis);
 
-            centreX = Centre.X - LengthdirX(axisMajor + Math.PI, focalLength);
-            centreY = Centre.Y - LengthdirY(axisMajor + Math.PI, focalLength);
+            centreX = Centre.X - LengthdirX(axisMajor + 180, focalLength);
+            centreY = Centre.Y - LengthdirY(axisMajor + 180, focalLength);
         }
 
         /// <summary>
         /// Gets the point at the given angle
         /// </summary>
-        /// <param name="theta">The angle in <B>Radians</B></param>
+        /// <param name="theta">The angle in <B>Degrees</B></param>
         /// <returns></returns>
         public Vector2 GetPoint(double theta)
         {
-            double x = centreX + radX * Math.Cos(theta + Math.PI) * Math.Cos(axisMajor + Math.PI) -
-                radY * Math.Sin(theta + Math.PI) * Math.Sin(axisMajor + Math.PI);
+            float range = Apopsis - Perapsis;
 
-            double y = centreY + radX * Math.Cos(theta + Math.PI) * Math.Sin(axisMajor + Math.PI) +
-                radY * Math.Sin(theta + Math.PI) * Math.Cos(axisMajor + Math.PI);
 
-            return new Vector2((float)x, (float)y);
+            if (Apopsis != Perapsis)
+            {
+                double x = centreX + radX * Math.Cos(theta) * Math.Cos(axisMajor) -
+                    radY * Math.Sin(theta) * Math.Sin(axisMajor);
+
+                double y = centreY + radX * Math.Cos(theta + Math.PI) * Math.Sin(axisMajor) +
+                    radY * Math.Sin(theta) * Math.Cos(axisMajor);
+
+                return new Vector2((float)x, (float)y);
+            }
+            else
+                return new Vector2(
+                    (float)LengthdirX(theta, Apopsis),
+                    (float)LengthdirY(theta, Apopsis));
+        }
+
+        /// <summary>
+        /// Gets the radius at the specified theta
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <returns></returns>
+        public float GetRadius(double theta)
+        {
+            if (Apopsis != Perapsis)
+                return (GetPoint(theta) - Centre).Length();
+            else
+                return (float)Apopsis;
+        }
+
+        public static implicit operator OrbitalInfo(int distance)
+        {
+            return new OrbitalInfo(distance);
         }
 
         #region Maths
-        const double toRad = Math.PI / 180.00;
-        const double toDeg = 180.00 * Math.PI;
+        const float toRad = (float)(Math.PI / 180.00);
+        const float toDeg = (float)(180.00 * Math.PI);
 
         /// <summary>
         /// Gets this degree as radians
         /// </summary>
-        /// <returns>this double in radians</returns>
-        public static double ToRad(double degrees)
+        /// <returns>this float in radians</returns>
+        public static float ToRad(float degrees)
         {
             return degrees * toRad;
         }
@@ -202,7 +243,7 @@ namespace SpaceGame2
         /// Gets this radian as a degree
         /// </summary>
         /// <returns>degrees in this radian</returns>
-        public static double ToDeg(double radians)
+        public static float ToDeg(float radians)
         {
             return radians * toDeg;
         }
@@ -213,9 +254,9 @@ namespace SpaceGame2
         /// <param name="angle">The angle in <b>degrees</b></param>
         /// <param name="length">The length of the arm</param>
         /// <returns>The change in x over <i>length</i></returns>
-        public static double LengthdirX(double angle, double length)
+        public static float LengthdirX(double angle, float length)
         {
-            return length * Math.Cos(angle);
+            return (float)(length * Math.Cos(angle * toRad));
         }
 
         /// <summary>
@@ -224,9 +265,9 @@ namespace SpaceGame2
         /// <param name="angle">The angle in <b>degrees</b></param>
         /// <param name="length">The length of the arm</param>
         /// <returns>The change in y over <i>length</i></returns>
-        public static double LengthdirY(double angle, double length)
+        public static float LengthdirY(double angle, float length)
         {
-            return length * Math.Sin(angle);
+            return (float)(length * Math.Sin(angle * toRad));
         }
 
         /// <summary>
@@ -236,9 +277,9 @@ namespace SpaceGame2
         /// <param name="max">The maximum value to wrap to</param>
         /// <param name="val">The value to wrap</param>
         /// <returns><i>val</i> wrapped between <i>max</i> and <i>min</i></returns>
-        public static double Wrap(double min, double max, double val)
+        public static float Wrap(float min, float max, float val)
         {
-            double range = max - min;
+            float range = max - min;
 
             while (val < min)
                 val += range;
@@ -255,9 +296,9 @@ namespace SpaceGame2
         /// <param name="val2">The the top value</param>
         /// <param name="amount">The amount to lerp by</param>
         /// <returns>a lerp between val1 and val2</returns>
-        public static double Lerp(double val1, double val2, double amount)
+        public static float Lerp(float val1, float val2, float amount)
         {
-            double range = val2 - val1;
+            float range = val2 - val1;
 
             return val1 + (range * amount);
         }
